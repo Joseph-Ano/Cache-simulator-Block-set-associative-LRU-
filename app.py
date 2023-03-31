@@ -92,7 +92,7 @@ Total memory access time: {total_access_time}\n
                    total_access_time=total_access_time, snapshot=formatted_table)
 
         st.download_button(
-            label="Download data as txt",
+            label="Download",
             data=text_contents,
             file_name='Group5.txt',
         )   

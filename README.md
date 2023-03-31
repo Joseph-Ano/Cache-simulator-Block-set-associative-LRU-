@@ -1,8 +1,26 @@
 # csarch2-final-proj
 Cache simulator (Block-set-associative / LRU)
 
+--- 
+
+# Assumptions
+1. Read policy: **Non-Load-through**
+2. Cache check time: **1ns**
+3. Cache access time: **1ns**
+4. Memory access time: **10ns**
+
+--- 
+
+# User manual 
 How to run the app:
-1. Input all required values
-2. For Main memory size and Cache memory size, specify if the value is in blocks or words. Example: "4 blocks"
-3. For program flow, specifify if its words or blocks BEFORE the list of values. Separate each value with a space. Example: "blocks 1 7 5 0 2 1 5 6 5 2 2 0"
-4. Once you press the download file button, the site will reload and the displayed results on the screen will disappear
+1. All input fields must be filled out.
+
+2. For Main memory size and Cache memory size, place either `blocks` or `words` after the value.
+>*Example:* **4 blocks** or **4 words**
+
+3. For program flow, place either `blocks` or `words` before the sequece of instructions. Separate each value with a space.  
+>*Example*: **blocks 1 7 5 0 2 1 5 6 5 2 2 0**
+
+4. Click the `Simulate` button once all fields are filled out. The results will be displayed on the screen.
+
+5. To download the results as a txt file, click the `Download` button below the results. Clicking the button will reload the web app and the results on the screen will disappear. The text will have a file name called `Group5.txt'`.
