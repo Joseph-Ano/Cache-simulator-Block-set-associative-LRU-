@@ -107,11 +107,11 @@ def main():
                 formatted_table = t.draw()
 
                 text_contents = '''
-        Cache hits: {cache_hit}\n
-        Cache miss: {cache_miss}\n
-        Average memory access time: {avg_access_time}\n
-        Total memory access time: {total_access_time}\n
-        {snapshot}
+Cache hits: {cache_hit}\n
+Cache miss: {cache_miss}\n
+Average memory access time: {avg_access_time}\n
+Total memory access time: {total_access_time}\n
+{snapshot}
                 '''.format(cache_hit=hit, cache_miss=miss, penalty=miss_penalty, avg_access_time=avg_access_time, 
                         total_access_time=total_access_time, snapshot=formatted_table)
 
