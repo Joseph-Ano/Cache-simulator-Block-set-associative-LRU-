@@ -33,4 +33,4 @@ cache_memory_size = "4 blocks"
 program_flow = "blocks 1 7 5 0 2 1 5 6 5 2 2 0"
 
 # Disclaimer
-*After rigorous testing, the `texttables` library has a limit on printing a number of tables. If the tables are printing beyond a "Set Size" of greater than or equal to 19, the application will throw an error. The application will still continue working and throwing errors until a valid input has been simulated.
+*After rigorous testing, the group discovered that the `texttables` library has a limit on printing a number of tables. If the tables are printing beyond a "Set Size" of greater than or equal to 19, the application will throw an error. The application will still continue working and throwing errors until a valid input has been simulated. User will be unable to download the text file, but the table will still be displayed on the web application.
