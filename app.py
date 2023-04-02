@@ -24,22 +24,26 @@ def main():
     simulate = st.button("Simulate", key="simulate")
 
     if(simulate):
+        #checks if cache_memory size is correct format
         temp = cache_memory_size.strip().split(" ")
         if(len(temp) != 2 or (temp[1] != "blocks" and temp[1] != "words")):
             existError = True
             st.warning("Cache memory size input is wrong format") 
 
+        #checks if program flow is correct format
         temp = program_flow.strip().split(" ")
-        if((temp[0] != "blocks" and temp[0] != "words") or len(temp) < 2):
+        if(len(temp) < 2 or (temp[0] != "blocks" and temp[0] != "words")):
             existError = True
             st.warning("Program flow input is wrong format") 
         
+        #checks if cache memory input flow are integers
         try:
             int(cache_memory_size[0])
         except ValueError:
             existError = True
             st.warning("Cache memory size must be an integer")
 
+        #checks if set size and block size input are integers
         try:
             set_size = int(set_size)
             block_size = int(block_size)
@@ -83,7 +87,7 @@ def main():
 
                     for col in range(0, set_size, 1):
                         if not snapshot[row][col]:
-                            snapshot[row][col] = "empty"
+                            snapshot[row][col] = "-"
                         else:
                             snapshot[row][col] = snapshot[row][col][0]
 
