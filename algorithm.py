@@ -27,6 +27,8 @@ def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_siz
                 dset = int(curr_instruction)//block_size % num_sets
         except ZeroDivisionError:
             return -5, -5, -5, -5
+        except ValueError:
+            return -1, -1, -1, -1
 
         set_capacity = len(cache[dset])
         newest = -1
