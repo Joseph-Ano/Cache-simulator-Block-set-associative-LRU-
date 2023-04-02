@@ -1,6 +1,6 @@
 # csarch2-final-proj
 Cache simulator (Block-set-associative / LRU)
-
+Created By Group 5: Ano, Ejercito, Limjoco
 --- 
 
 # Assumptions
@@ -23,4 +23,7 @@ How to run the app:
 
 4. Click the `Simulate` button once all fields are filled out. The results will be displayed on the screen.
 
-5. To download the results as a txt file, click the `Download` button below the results. Clicking the button will reload the web app and the results on the screen will disappear. The text will have a file name called `Group5.txt'`.
+5. To download the results as a txt file, click the `Download` button below the results. Clicking the button will reload the web app and the results on the screen will disappear. The text will have a file name called `Group5_Simulation.txt'`.
+
+# Disclaimer
+*After rigorous testing, the `texttables` library has a limit on printing a number of tables. If the tables are printing beyond a "Set Size" of greater than or equal to 19, the application will throw an error. The application will still continue working and throwing errors until a valid input has been simulated.
