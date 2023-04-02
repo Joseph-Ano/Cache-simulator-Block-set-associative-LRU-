@@ -30,7 +30,7 @@ def main():
             existError = True
 
         temp = program_flow.split(" ")
-        if(temp[0] != "blocks" or temp[0] != "words" and len(temp) < 2):
+        if((temp[0] != "blocks" or temp[0] != "words") or len(temp) < 2):
             st.warning("Program flow input is wrong format") 
             existError = True
 
