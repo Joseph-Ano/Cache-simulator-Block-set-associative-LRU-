@@ -25,5 +25,12 @@ How to run the app:
 
 5. To download the results as a txt file, click the `Download` button below the results. Clicking the button will reload the web app and the results on the screen will disappear. The text will have a file name called `Group5_Simulation.txt'`.
 
+**Sample Input**
+set_size = 2 #blocks
+block_size = 2 #words
+mm = None
+cache_memory_size = "4 blocks"
+program_flow = "blocks 1 7 5 0 2 1 5 6 5 2 2 0"
+
 # Disclaimer
 *After rigorous testing, the `texttables` library has a limit on printing a number of tables. If the tables are printing beyond a "Set Size" of greater than or equal to 19, the application will throw an error. The application will still continue working and throwing errors until a valid input has been simulated.
