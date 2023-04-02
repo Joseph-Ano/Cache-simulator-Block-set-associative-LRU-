@@ -22,7 +22,7 @@ def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_siz
         if(sequence[0] == "blocks"):
             dset = int(curr_instruction) % num_sets
         else:
-            dest = int(curr_instruction)//block_size % num_sets
+            dset = int(curr_instruction)//block_size % num_sets
 
         set_capacity = len(cache[dset])
         newest = -1
