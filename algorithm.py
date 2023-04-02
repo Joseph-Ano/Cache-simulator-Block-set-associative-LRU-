@@ -1,6 +1,7 @@
 def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_size: str, program_flow: str):
     cache_size = cache_memory_size.strip().split(" ")
 
+
     if(cache_size[1] == "blocks"):
         num_sets = int(cache_size[0]) / set_size
     else:
@@ -19,10 +20,13 @@ def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_siz
     for i in range(1, sequence_length, 1):
         curr_instruction = sequence[i]
 
-        if(sequence[0] == "blocks"):
-            dset = int(curr_instruction) % num_sets
-        else:
-            dset = int(curr_instruction)//block_size % num_sets
+        try:
+            if(sequence[0] == "blocks"):
+                dset = int(curr_instruction) % num_sets
+            else:
+                dset = int(curr_instruction)//block_size % num_sets
+        except ZeroDivisionError:
+            return -5, -5, -5, -5
 
         set_capacity = len(cache[dset])
         newest = -1
