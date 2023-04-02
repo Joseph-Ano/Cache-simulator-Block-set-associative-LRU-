@@ -10,9 +10,9 @@ def main():
 
     set_size = st.sidebar.text_input("Set Size", key="set_size")
     block_size = st.sidebar.text_input("Block Size", key="block_size")
-    mm = st.sidebar.text_input("Main memory size", key="mm")
-    cache_memory_size = st.sidebar.text_input("Cache memory size", key="cache_size")
-    program_flow = st.sidebar.text_input("Program flow", key="program_flow")
+    mm = st.sidebar.text_input("Main Memory Size", key="mm")
+    cache_memory_size = st.sidebar.text_input("Cache Memory Size", key="cache_size")
+    program_flow = st.sidebar.text_input("Program Flow", key="program_flow")
     existError = False
     
     # set_size = 2 #blocks
@@ -28,20 +28,20 @@ def main():
         temp = cache_memory_size.strip().split(" ")
         if(len(temp) != 2 or (temp[1] != "blocks" and temp[1] != "words")):
             existError = True
-            st.warning("Cache memory size input is wrong format") 
+            st.warning("Cache memory size input is wrong format.") 
 
         #checks if program flow is correct format
         temp = program_flow.strip().split(" ")
         if(len(temp) < 2 or (temp[0] != "blocks" and temp[0] != "words")):
             existError = True
-            st.warning("Program flow input is wrong format") 
+            st.warning("Program flow input is wrong format.") 
         
         #checks if cache memory input flow are integers
         try:
             int(cache_memory_size[0])
         except ValueError:
             existError = True
-            st.warning("Cache memory size must be an integer")
+            st.warning("Cache Memory Size must be an integer.")
 
         #checks if set size and block size input are integers
         try:
@@ -49,7 +49,7 @@ def main():
             block_size = int(block_size)
         except ValueError:
             existError = True
-            st.warning("Set size and Block size must be an integer")
+            st.warning("Set Size and Block Size must be an integer.")
 
         if(not existError):
             cache_check = 1
@@ -58,9 +58,9 @@ def main():
             snapshot, hit, miss = main_algo(set_size, block_size, mm, cache_memory_size, program_flow)
 
             if(snapshot == -5):
-                st.warning("Cache memory size is not a valid input given the Set Size and/or Block size")
+                st.warning("Cache Memory Size is not a valid input given the Set Size and/or Block Size")
             elif(snapshot == -1):
-                st.warning("Instructions in program flow must be integers")
+                st.warning("Instructions in Program Flow must be integers")
 
             else:
                 miss_penalty = cache_check + (block_size*memory_access_time) + cache_access_time
@@ -70,11 +70,11 @@ def main():
                 total_access_time = (hit*block_size*cache_access_time) + (miss*block_size*(cache_access_time+memory_access_time)) + cache_check*miss
 
 
-                st.write("Cache hits: {cache_hit}".format(cache_hit=hit))
-                st.write("Cache miss: {cache_miss}".format(cache_miss=miss))
-                st.write("Miss penalty: {penalty}".format(penalty=miss_penalty))
-                st.write("Average memory access time: {access_time}".format(access_time=avg_access_time))
-                st.write("Total memory access time: {access_time}".format(access_time=total_access_time))
+                st.write("Cache Hits: {cache_hit}".format(cache_hit=hit))
+                st.write("Cache Miss: {cache_miss}".format(cache_miss=miss))
+                st.write("Miss Penalty: {penalty}".format(penalty=miss_penalty))
+                st.write("Average Memory Access Time: {access_time}".format(access_time=avg_access_time))
+                st.write("Total Memory Access Time: {access_time}".format(access_time=total_access_time))
 
                 table_header = ["Sets"]
 
@@ -112,10 +112,10 @@ def main():
                 formatted_table = t.draw()
 
                 text_contents = '''
-Cache hits: {cache_hit}\n
-Cache miss: {cache_miss}\n
-Average memory access time: {avg_access_time}\n
-Total memory access time: {total_access_time}\n
+Cache Hits: {cache_hit}\n
+Cache Miss: {cache_miss}\n
+Average Memory Access Time: {avg_access_time}\n
+Total Memory Access Time: {total_access_time}\n
 {snapshot}
                 '''.format(cache_hit=hit, cache_miss=miss, penalty=miss_penalty, avg_access_time=avg_access_time, 
                         total_access_time=total_access_time, snapshot=formatted_table)
@@ -123,7 +123,7 @@ Total memory access time: {total_access_time}\n
                 st.download_button(
                     label="Download",
                     data=text_contents,
-                    file_name='Group5.txt',
+                    file_name='Group5_Simulation.txt',
                 )   
 
 if __name__ == "__main__":
