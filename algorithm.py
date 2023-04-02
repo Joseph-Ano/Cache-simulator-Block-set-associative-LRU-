@@ -1,7 +1,6 @@
 def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_size: str, program_flow: str):
     cache_size = cache_memory_size.strip().split(" ")
 
-
     if(cache_size[1] == "blocks"):
         num_sets = int(cache_size[0]) / set_size
     else:
@@ -26,9 +25,9 @@ def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_siz
             else:
                 dset = int(curr_instruction)//block_size % num_sets
         except ZeroDivisionError:
-            return -5, -5, -5, -5
+            return -5, -5, -5
         except ValueError:
-            return -1, -1, -1, -1
+            return -1, -1, -1
 
         set_capacity = len(cache[dset])
         newest = -1
@@ -59,5 +58,5 @@ def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_siz
             cache[dset][oldest_index] = [curr_instruction, newest+1]
             # print("miss: " + curr_instruction + " age: " + str(newest+1))
        
-    return cache, hit, miss, num_sets
+    return cache, hit, miss
 

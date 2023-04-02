@@ -26,14 +26,14 @@ def main():
     if(simulate):
         temp = cache_memory_size.strip().split(" ")
         if(len(temp) != 2 or (temp[1] != "blocks" and temp[1] != "words")):
-            st.warning("Cache memory size input is wrong format") 
             existError = True
+            st.warning("Cache memory size input is wrong format") 
 
         temp = program_flow.strip().split(" ")
         if((temp[0] != "blocks" and temp[0] != "words") or len(temp) < 2):
-            st.warning("Program flow input is wrong format") 
             existError = True
-
+            st.warning("Program flow input is wrong format") 
+        
         try:
             int(cache_memory_size[0])
         except ValueError:
@@ -51,7 +51,7 @@ def main():
             cache_check = 1
             cache_access_time = 1
             memory_access_time = 10
-            snapshot, hit, miss, num_sets = main_algo(set_size, block_size, mm, cache_memory_size, program_flow)
+            snapshot, hit, miss = main_algo(set_size, block_size, mm, cache_memory_size, program_flow)
 
             if(snapshot == -5):
                 st.warning("Cache memory size is not a valid input given the Set Size and/or Block size")
