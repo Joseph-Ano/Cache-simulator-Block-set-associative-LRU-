@@ -62,13 +62,15 @@ def main():
                 else:
                     snapshot[row][col] = snapshot[row][col][0]
 
-        for i in range(0, num_sets, 1):
+        for i in range(0, set_size, 1):
             table_header.append("Block {i}".format(i=i))
 
         for i in range(0, len(snapshot),1):
             snapshot[i].insert(0, "Set {i}".format(i=i))
 
         np_snapshot = np.array(snapshot)
+
+        print(snapshot)
 
         df = pd.DataFrame(np_snapshot, columns = table_header)
         st.table(df)

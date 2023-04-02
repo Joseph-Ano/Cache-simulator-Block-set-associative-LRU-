@@ -44,7 +44,7 @@ def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_siz
             hit+=1
             cache[dset][age_index][1] = newest + 1
             # print("hit: " + curr_instruction + " age: " + str(newest+1))
-        elif(set_capacity < num_sets):
+        elif(set_capacity < set_size):
             miss+=1
             cache[dset].append([curr_instruction, newest+1])
             # print("miss: " + curr_instruction + " age: " + str(newest+1))
