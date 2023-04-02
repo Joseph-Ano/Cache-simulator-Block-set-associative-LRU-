@@ -8,11 +8,11 @@ def main():
     st.title("Group 5 CSARCH2 Final Project")
     st.text("Cache simulator (Block-set-associative / LRU)")
 
-    set_size = st.sidebar.text_input("Set Size", key="set_size")
-    block_size = st.sidebar.text_input("Block Size", key="block_size")
+    set_size = st.sidebar.text_input("Set Size (blocks)", key="set_size")
+    block_size = st.sidebar.text_input("Block Size (words)", key="block_size")
     mm = st.sidebar.text_input("Main Memory Size", key="mm")
-    cache_memory_size = st.sidebar.text_input("Cache Memory Size", key="cache_size")
-    program_flow = st.sidebar.text_input("Program Flow", key="program_flow")
+    cache_memory_size = st.sidebar.text_input("Cache Memory Size (blocks/words)", key="cache_size")
+    program_flow = st.sidebar.text_input("Program Flow (blocks/words)", key="program_flow")
     existError = False
     
     # set_size = 2 #blocks
@@ -72,9 +72,9 @@ def main():
 
                 st.write("Cache Hits: {cache_hit}".format(cache_hit=hit))
                 st.write("Cache Miss: {cache_miss}".format(cache_miss=miss))
-                st.write("Miss Penalty: {penalty}".format(penalty=miss_penalty))
-                st.write("Average Memory Access Time: {access_time}".format(access_time=avg_access_time))
-                st.write("Total Memory Access Time: {access_time}".format(access_time=total_access_time))
+                st.write("Miss Penalty: {penalty}ns".format(penalty=miss_penalty))
+                st.write("Average Memory Access Time: {access_time}ns".format(access_time=avg_access_time))
+                st.write("Total Memory Access Time: {access_time}ns".format(access_time=total_access_time))
 
                 table_header = ["Sets"]
 
@@ -114,8 +114,8 @@ def main():
                 text_contents = '''
 Cache Hits: {cache_hit}\n
 Cache Miss: {cache_miss}\n
-Average Memory Access Time: {avg_access_time}\n
-Total Memory Access Time: {total_access_time}\n
+Average Memory Access Time: {avg_access_time}ns\n
+Total Memory Access Time: {total_access_time}ns\n
 {snapshot}
                 '''.format(cache_hit=hit, cache_miss=miss, penalty=miss_penalty, avg_access_time=avg_access_time, 
                         total_access_time=total_access_time, snapshot=formatted_table)
