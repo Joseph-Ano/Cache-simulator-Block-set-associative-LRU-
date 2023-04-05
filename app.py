@@ -14,9 +14,9 @@ def main():
     block_size = st.sidebar.text_input("Block Size (words)", key="block_size")
     mm = st.sidebar.text_input("Main Memory Size", key="mm")
     cache_memory_size = st.sidebar.text_input("Cache Memory Size (blocks/words)", key="cache_size")
-    cache_type = st.sidebar.radio("Cache Memory Type", input_type)
+    cache_type = st.sidebar.radio("Cache Memory Type", input_type, horizontal=True)
     program_flow = st.sidebar.text_input("Program Flow (blocks/words)", key="program_flow")
-    instruction_type = st.sidebar.radio("Program Flow Type", input_type)
+    instruction_type = st.sidebar.radio("Program Flow Type", input_type, horizontal=True)
     existError = False
     
     # set_size = 2 #blocks
