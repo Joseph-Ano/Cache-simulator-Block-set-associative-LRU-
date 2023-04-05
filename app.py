@@ -5,6 +5,8 @@ import streamlit as st
 from algorithm import *
 
 def main():
+    input_type = ['blocks', 'words']
+
     st.title("Group 5 CSARCH2 Final Project")
     st.text("Cache simulator (Block-set-associative / LRU)")
 
@@ -12,55 +14,69 @@ def main():
     block_size = st.sidebar.text_input("Block Size (words)", key="block_size")
     mm = st.sidebar.text_input("Main Memory Size", key="mm")
     cache_memory_size = st.sidebar.text_input("Cache Memory Size (blocks/words)", key="cache_size")
+    cache_type = st.sidebar.radio("Cache Memory Type", input_type)
     program_flow = st.sidebar.text_input("Program Flow (blocks/words)", key="program_flow")
+    instruction_type = st.sidebar.radio("Program Flow Type", input_type)
     existError = False
     
     # set_size = 2 #blocks
     # block_size = 2 #words
     # mm = None
-    # cache_memory_size = "4 blocks"
-    # program_flow = "blocks 1 7 5 0 2 1 5 6 5 2 2 0"
+    # cache_memory_size = "4"
+    # program_flow = "1 7 5 0 2 1 5 6 5 2 2 0"
 
     simulate = st.button("Simulate", key="simulate")
 
     if(simulate):
-        #checks if cache_memory size is correct format
-        temp = cache_memory_size.strip().split(" ")
-        if(len(temp) != 2 or (temp[1] != "blocks" and temp[1] != "words")):
-            existError = True
-            st.warning("Cache memory size input is wrong format.") 
+        set_size = set_size.strip()
+        block_size = block_size.strip()
+        cache_memory_size = cache_memory_size.strip()
+        program_flow = program_flow.strip()
 
-        #checks if program flow is correct format
-        temp = program_flow.strip().split(" ")
-        if(len(temp) < 2 or (temp[0] != "blocks" and temp[0] != "words")):
-            existError = True
-            st.warning("Program flow input is wrong format.") 
-        
-        #checks if cache memory input flow are integers
-        try:
-            int(cache_memory_size[0])
-        except ValueError:
-            existError = True
-            st.warning("Cache Memory Size must be an integer.")
-
-        #checks if set size and block size input are integers
-        try:
+        try:    #checks if set size and block size input are integers
             set_size = int(set_size)
             block_size = int(block_size)
         except ValueError:
             existError = True
             st.warning("Set Size and Block Size must be an integer.")
 
-        if(not existError):
+        if(existError == False):
+            if(set_size < 0):   #checks if set size is positive
+                st.warning("Set Size must be a positive integer.")
+                existError = True
+            elif(block_size < 0):   #checks if block size is positive
+                st.warning("Block Size must be a positive integer.")
+                existError = True
+
+            if(existError == False):
+                try:
+                    cache_memory_size = int(cache_memory_size) #checks if cache memory size is an integer
+                except ValueError:
+                    st.warning("Cache memory size must be an integer")
+                    existError = True
+
+                if(existError == False):
+                    if(cache_memory_size < 0):  #checks if cache memory size is positive
+                        st.warning("Cache memory size must be a positive integer")
+                        existError = True
+
+                    if(existError == False):
+                        if(program_flow == ""): #checks if program flow has at least one instruction
+                            st.warning("Program flow must have at least one instruction.")
+                            existError = True 
+
+        if(existError == False):
             cache_check = 1
             cache_access_time = 1
             memory_access_time = 10
-            snapshot, hit, miss = main_algo(set_size, block_size, mm, cache_memory_size, program_flow)
+            snapshot, hit, miss = main_algo(set_size, block_size, mm, cache_memory_size, cache_type, program_flow, instruction_type)
 
-            if(snapshot == -5):
+            if(snapshot == -1):
                 st.warning("Cache Memory Size is not a valid input given the Set Size and/or Block Size")
-            elif(snapshot == -1):
+            elif(snapshot == -2):
                 st.warning("Instructions in Program Flow must be integers")
+            elif(snapshot == -3):
+                st.warning("Instructions in Program Flow must be positive")
 
             else:
                 miss_penalty = cache_check + (block_size*memory_access_time) + cache_access_time
@@ -68,7 +84,6 @@ def main():
                 miss_rate = miss/(hit+miss)
                 avg_access_time = hit_rate*cache_access_time + miss_penalty*miss_rate
                 total_access_time = (hit*block_size*cache_access_time) + (miss*block_size*(cache_access_time+memory_access_time)) + cache_check*miss
-
 
                 st.write("Cache Hits: {cache_hit}".format(cache_hit=hit))
                 st.write("Cache Miss: {cache_miss}".format(cache_miss=miss))
@@ -101,7 +116,6 @@ def main():
 
                 df = pd.DataFrame(np_snapshot, columns = table_header)
                 st.table(df)
-
 
                 table_header = [table_header]
                 table_header.extend(snapshot)

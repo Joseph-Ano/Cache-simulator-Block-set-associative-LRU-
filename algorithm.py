@@ -1,33 +1,35 @@
-def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_size: str, program_flow: str):
-    cache_size = cache_memory_size.strip().split(" ")
+def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_size: str, cache_memory_type: str, program_flow: str, program_flow_type: str):
 
-    if(cache_size[1] == "blocks"):
-        num_sets = int(cache_size[0]) / set_size
+    if(cache_memory_type == "blocks"):
+        num_sets = int(cache_memory_size) / set_size
     else:
-        blocks_in_cache = int(cache_size[0]) / block_size
+        blocks_in_cache = int(cache_memory_size) / block_size
         num_sets = blocks_in_cache / set_size
 
     num_sets = int(num_sets)
 
-    sequence = program_flow.strip().split(" ")
+    sequence = program_flow.split(" ")
     sequence_length = len(sequence)
     
     cache = [[] for _ in range(num_sets)]
     hit = 0
     miss = 0
     
-    for i in range(1, sequence_length, 1):
+    for i in range(0, sequence_length, 1):
         curr_instruction = sequence[i]
-
+        
         try:
-            if(sequence[0] == "blocks"):
+            if(program_flow_type == "blocks"):
                 dset = int(curr_instruction) % num_sets
             else:
                 dset = int(curr_instruction)//block_size % num_sets
         except ZeroDivisionError:
-            return -5, -5, -5
-        except ValueError:
             return -1, -1, -1
+        except ValueError:
+            return -2, -2, -2
+        
+        if(int(curr_instruction) < 0):
+            return -3, -3, -3
 
         set_capacity = len(cache[dset])
         newest = -1
