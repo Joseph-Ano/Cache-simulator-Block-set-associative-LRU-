@@ -41,10 +41,10 @@ def main():
             st.warning("Set Size and Block Size must be an integer.")
 
         if(existError == False):
-            if(set_size < 0):   #checks if set size is positive
+            if(set_size < 1):   #checks if set size is positive
                 st.warning("Set Size must be a positive integer.")
                 existError = True
-            elif(block_size < 0):   #checks if block size is positive
+            elif(block_size < 1):   #checks if block size is positive
                 st.warning("Block Size must be a positive integer.")
                 existError = True
 
@@ -56,7 +56,7 @@ def main():
                     existError = True
 
                 if(existError == False):
-                    if(cache_memory_size < 0):  #checks if cache memory size is positive
+                    if(cache_memory_size < 1):  #checks if cache memory size is positive
                         st.warning("Cache memory size must be a positive integer")
                         existError = True
 
