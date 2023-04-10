@@ -13,6 +13,7 @@ def main():
     set_size = st.sidebar.text_input("Set Size (blocks)", key="set_size")
     block_size = st.sidebar.text_input("Block Size (words)", key="block_size")
     mm = st.sidebar.text_input("Main Memory Size", key="mm")
+    mm_type = st.sidebar.radio("Main Memory Type", input_type, horizontal=True)
     cache_memory_size = st.sidebar.text_input("Cache Memory Size (blocks/words)", key="cache_size")
     cache_type = st.sidebar.radio("Cache Memory Type", input_type, horizontal=True)
     program_flow = st.sidebar.text_input("Program Flow (blocks/words)", key="program_flow")
