@@ -27,7 +27,8 @@ How to run the app:
 **Sample Input**
 - Set Size = **2**
 - Block Size = **2**
-- Main Memory Size = **None**
+- Main Memory Size = **100**
+- Main Memory Type = **blocks**
 - Cache Memory Size = **4** 
 - Cache Memory Type = **blocks**
 - Program Flow = **1 7 5 0 2 1 5 6 5 2 2 0**
