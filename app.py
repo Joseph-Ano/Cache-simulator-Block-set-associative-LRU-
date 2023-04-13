@@ -12,8 +12,8 @@ def main():
 
     set_size = st.sidebar.text_input("Set Size (blocks)", key="set_size")
     block_size = st.sidebar.text_input("Block Size (words)", key="block_size")
-    mm = st.sidebar.text_input("Main Memory Size", key="mm")
-    mm_type = st.sidebar.radio("Main Memory Type", input_type, horizontal=True)
+    main_memory_size = st.sidebar.text_input("Main Memory Size", key="mm")
+    main_memory_type = st.sidebar.radio("Main Memory Type", input_type, horizontal=True)
     cache_memory_size = st.sidebar.text_input("Cache Memory Size (blocks/words)", key="cache_size")
     cache_type = st.sidebar.radio("Cache Memory Type", input_type, horizontal=True)
     program_flow = st.sidebar.text_input("Program Flow (blocks/words)", key="program_flow")
@@ -22,7 +22,7 @@ def main():
     
     # set_size = 2 #blocks
     # block_size = 2 #words
-    # mm = None
+    # main_memory_size = 100
     # cache_memory_size = "4"
     # program_flow = "1 7 5 0 2 1 5 6 5 2 2 0"
 
@@ -51,32 +51,48 @@ def main():
 
             if(existError == False):
                 try:
-                    cache_memory_size = int(cache_memory_size) #checks if cache memory size is an integer
+                    main_memory_size = int(main_memory_size) #checks if main memory size is an integer
                 except ValueError:
-                    st.warning("Cache memory size must be an integer")
+                    st.warning("Main memory size must be an integer")
                     existError = True
 
                 if(existError == False):
-                    if(cache_memory_size < 1):  #checks if cache memory size is positive
-                        st.warning("Cache memory size must be a positive integer")
+                    if(main_memory_size < 1):  #checks if cache memory size is positive
+                        st.warning("Main memory size must be a positive integer")
                         existError = True
-
+                    
                     if(existError == False):
-                        if(program_flow == ""): #checks if program flow has at least one instruction
-                            st.warning("Program flow must have at least one instruction.")
-                            existError = True 
+                        try:
+                            cache_memory_size = int(cache_memory_size) #checks if cache memory size is an integer
+                        except ValueError:
+                            st.warning("Cache memory size must be an integer")
+                            existError = True
+
+                        if(existError == False):
+                            if(cache_memory_size < 1):  #checks if cache memory size is positive
+                                st.warning("Cache memory size must be a positive integer")
+                                existError = True
+
+                            if(existError == False):
+                                if(program_flow == ""): #checks if program flow has at least one instruction
+                                    st.warning("Program flow must have at least one instruction.")
+                                    existError = True 
 
         if(existError == False):
             cache_check = 1
             cache_access_time = 1
             memory_access_time = 10
-            snapshot, hit, miss = main_algo(set_size, block_size, mm, cache_memory_size, cache_type, program_flow, instruction_type)
+            snapshot, hit, miss = main_algo(set_size, block_size, main_memory_size, main_memory_type, cache_memory_size, cache_type, program_flow, instruction_type)
 
             if(snapshot == -1):
-                st.warning("Cache Memory Size is not a valid input given the Set Size and/or Block Size")
+                st.warning("Main Memory Size cannot be smaller than Cache memory size")
             elif(snapshot == -2):
-                st.warning("Instructions in Program Flow must be integers")
+                st.warning("Program flow contains instructions outside of main memory size")
             elif(snapshot == -3):
+                st.warning("Cache Memory Size is not a valid input given the Set Size and/or Block Size")
+            elif(snapshot == -4):
+                st.warning("Instructions in Program Flow must be integers")
+            elif(snapshot == -5):
                 st.warning("Instructions in Program Flow must be positive")
 
             else:

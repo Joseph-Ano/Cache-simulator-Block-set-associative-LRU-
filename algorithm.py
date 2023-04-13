@@ -1,12 +1,20 @@
-def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_size: str, cache_memory_type: str, program_flow: str, program_flow_type: str):
+def main_algo(set_size: int, block_size: int, 
+              main_memory_size: int, main_memory_type: str, 
+              cache_memory_size: int, cache_memory_type: str, 
+              program_flow: str, program_flow_type: str):
 
     if(cache_memory_type == "blocks"):
-        num_sets = int(cache_memory_size) / set_size
-    else:
-        blocks_in_cache = int(cache_memory_size) / block_size
-        num_sets = blocks_in_cache / set_size
+        cache_memory_size = cache_memory_size*block_size
+    
+    blocks_in_cache = cache_memory_size / block_size
+    num_sets = int(blocks_in_cache // set_size)
 
-    num_sets = int(num_sets)
+    if(main_memory_type == "blocks"):
+        main_memory_size = main_memory_size*block_size
+
+    if(main_memory_size < cache_memory_size):
+        return -1, -1, -1
+
 
     sequence = program_flow.split(" ")
     sequence_length = len(sequence)
@@ -20,16 +28,26 @@ def main_algo(set_size: int, block_size: int, main_memory_size, cache_memory_siz
         
         try:
             if(program_flow_type == "blocks"):
-                dset = int(curr_instruction) % num_sets
+                curr_instruction = int(curr_instruction)
+                temp = curr_instruction * block_size
+
+                if(main_memory_size < temp):
+                    return -2, -2, -2
+                dset =  curr_instruction % num_sets
             else:
-                dset = int(curr_instruction)//block_size % num_sets
+                curr_instruction = int(curr_instruction)
+                
+                if(main_memory_size < curr_instruction):
+                    return -2, -2, -2
+                dset = curr_instruction//block_size % num_sets
+                
         except ZeroDivisionError:
-            return -1, -1, -1
-        except ValueError:
-            return -2, -2, -2
-        
-        if(int(curr_instruction) < 0):
             return -3, -3, -3
+        except ValueError:
+            return -4, -4, -4
+        
+        if(curr_instruction < 0):
+            return -5, -5, -5
 
         set_capacity = len(cache[dset])
         newest = -1
