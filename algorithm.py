@@ -27,16 +27,15 @@ def main_algo(set_size: int, block_size: int,
         curr_instruction = sequence[i]
         
         try:
-            if(program_flow_type == "blocks"):
-                curr_instruction = int(curr_instruction)
-                temp = curr_instruction * block_size
+            curr_instruction = int(curr_instruction)
 
+            if(program_flow_type == "blocks"):
+                temp = curr_instruction * block_size
                 if(main_memory_size < temp):
                     return -2, -2, -2
                 dset =  curr_instruction % num_sets
+
             else:
-                curr_instruction = int(curr_instruction)
-                
                 if(main_memory_size < curr_instruction):
                     return -2, -2, -2
                 dset = curr_instruction//block_size % num_sets
