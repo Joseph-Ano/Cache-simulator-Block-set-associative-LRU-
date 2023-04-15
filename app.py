@@ -105,9 +105,9 @@ def main():
 
                 st.write("Cache Hits: {cache_hit}".format(cache_hit=hit))
                 st.write("Cache Miss: {cache_miss}".format(cache_miss=miss))
-                st.write("Miss Penalty: {penalty}ns".format(penalty=miss_penalty))
-                st.write("Average Memory Access Time: {access_time}ns".format(access_time=avg_access_time))
-                st.write("Total Memory Access Time: {access_time}ns".format(access_time=total_access_time))
+                st.write("Miss Penalty: {penalty:.4f}ns".format(penalty=miss_penalty))
+                st.write("Average Memory Access Time: {access_time:.4f}ns".format(access_time=avg_access_time))
+                st.write("Total Memory Access Time: {access_time:.4f}ns".format(access_time=total_access_time))
 
                 table_header = ["Sets"]
 
