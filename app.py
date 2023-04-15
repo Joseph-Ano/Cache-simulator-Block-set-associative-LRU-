@@ -146,8 +146,9 @@ def main():
                 text_contents = '''
 Cache Hits: {cache_hit}\n
 Cache Miss: {cache_miss}\n
-Average Memory Access Time: {avg_access_time}ns\n
-Total Memory Access Time: {total_access_time}ns\n
+Miss penalty: {penalty:.4f}\n
+Average Memory Access Time: {avg_access_time:.4f}ns\n
+Total Memory Access Time: {total_access_time:.4f}ns\n
 {snapshot}
                 '''.format(cache_hit=hit, cache_miss=miss, penalty=miss_penalty, avg_access_time=avg_access_time, 
                         total_access_time=total_access_time, snapshot=formatted_table)
