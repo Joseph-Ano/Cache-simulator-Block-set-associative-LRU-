@@ -1,7 +1,4 @@
-def main_algo(set_size: int, block_size: int, 
-              main_memory_size: int, main_memory_type: str, 
-              cache_memory_size: int, cache_memory_type: str, 
-              program_flow: str, program_flow_type: str):
+def main_algo(set_size: int, block_size: int, main_memory_size: int, main_memory_type: str, cache_memory_size: int, cache_memory_type: str, program_flow: str, program_flow_type: str):
 
     if(cache_memory_type == "blocks"):
         cache_memory_size = cache_memory_size*block_size
