@@ -7,7 +7,8 @@ from algorithm import *
 def main():
     input_type = ['blocks', 'words']
 
-    st.title("Group 5 CSARCH2 Final Project")
+    st.title("S11 Group 5 CSARCH2 Final Project")
+    st.text("Members: Ano, Ejercito, Limjoco")
     st.text("Cache simulator (Block-set-associative / LRU)")
 
     set_size = st.sidebar.text_input("Set Size (blocks)", key="set_size")
