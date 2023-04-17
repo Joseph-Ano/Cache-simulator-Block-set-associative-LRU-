@@ -32,7 +32,7 @@ def main_algo(set_size: int, block_size: int, main_memory_size: int, main_memory
                 dset =  curr_instruction % num_sets
 
             else:
-                if(main_memory_size < curr_instruction):
+                if(main_memory_size < (curr_instruction-1)):
                     return -2, -2, -2
                 dset = curr_instruction//block_size % num_sets
                 
