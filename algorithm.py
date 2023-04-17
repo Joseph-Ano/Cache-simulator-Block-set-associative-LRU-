@@ -12,7 +12,6 @@ def main_algo(set_size: int, block_size: int, main_memory_size: int, main_memory
     if(main_memory_size < cache_memory_size):
         return -1, -1, -1
 
-
     sequence = program_flow.split(" ")
     sequence_length = len(sequence)
     
@@ -27,7 +26,7 @@ def main_algo(set_size: int, block_size: int, main_memory_size: int, main_memory
             curr_instruction = int(curr_instruction)
 
             if(program_flow_type == "blocks"):
-                temp = curr_instruction * block_size
+                temp = (curr_instruction+1) * block_size
                 if(main_memory_size < temp):
                     return -2, -2, -2
                 dset =  curr_instruction % num_sets
